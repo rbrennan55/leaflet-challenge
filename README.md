@@ -18,17 +18,17 @@ Solution Files Submitted
 - /static/js/logic.js
   
 Part 1: Create the Earthquake Visualization
-![alt text](images/Image1.PNG)
+![alt text](images/2-BasicMap.png)
 
 Your first task is to visualize an earthquake dataset. Complete the following steps:
 
 Get your dataset. To do so, follow these steps:
 
 The USGS provides earthquake data in a number of different formats, updated every 5 minutes. Visit the USGS GeoJSON FeedLinks to an external site. page and choose a dataset to visualize. The following image is an example screenshot of what appears when you visit this link:
-![alt text](images/Image1.PNG)
+![alt text](images/3-Data.png)
 
 When you click a dataset (such as "All Earthquakes from the Past 7 Days"), you will be given a JSON representation of that data. Use the URL of this JSON to pull in the data for the visualization. The following image is a sampling of earthquake data in JSON format:
-![alt text](images/Image1.PNG)
+![alt text](images/4-JSON.png)
 
 Import and visualize the data by doing the following:
 
