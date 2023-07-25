@@ -17,7 +17,7 @@ Solution Files Submitted
 - /static/css/style.css
 - /static/js/logic.js
   
-Part 1: Create the Earthquake Visualization
+Earthquake Visualization Map
 ![alt text](images/2-BasicMap.png)
 
 Your first task is to visualize an earthquake dataset. Complete the following steps:
