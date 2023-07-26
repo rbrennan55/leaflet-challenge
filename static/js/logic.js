@@ -28,15 +28,15 @@ function setDepthColor(quakeDepth) {
     }
 };
 
-function setDepthRadius(feature, latlng) {
-    var marker = {
-      radius: feature.properties.mag * 20000,
+function setDepthRadius(feature, layer) {
+    let circles = {
+      radius: feature.properties.mag * 3000,
       fillColor: setDepthColor(feature.geometry.coordinates[2]),
       fillOpacity: 1,
       color: "black",
       weight: 1
     }
-    return L.circle(latlng,marker);
+    return L.circle(layer,circles);
   };
 
 
@@ -58,15 +58,16 @@ function createFeatures(earthquakeData) {
    
   });
 
+  //Add fault lines
   techPlates = new L.layerGroup();
 
-    // Perform a GET request to the tectonicplatesURL
-    d3.json(techPlatesURL).then(function (plateData) {     
-          L.geoJSON(plateData, {
-            color: "#ffbf00",
-            weight: 2
-        }).addTo(techPlates);
-    });
+  // Perform a GET request to the tectonicplatesURL
+  d3.json(techPlatesURL).then(function (plateData) {     
+    L.geoJSON(plateData, {
+        color: "#ffff00",
+        weight: 2
+    }).addTo(techPlates);
+  });
 
   // Send our earthquakes layer to the createMap function/
   createMap(earthquakes);
