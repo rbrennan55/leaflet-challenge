@@ -30,10 +30,11 @@ function setDepthColor(quakeDepth) {
 
 function setDepthRadius(feature, layer) {
     let circles = {
-      radius: feature.properties.mag * 3000,
+      radius: feature.properties.mag * 15000,
       fillColor: setDepthColor(feature.geometry.coordinates[2]),
       fillOpacity: 1,
-      color: "black",
+      stroke: true,
+      //color: "black",
       weight: 1
     }
     return L.circle(layer,circles);
@@ -110,7 +111,44 @@ function createMap(earthquakes) {
 
 
   // Create Legend
+ 
   
+
+  
+  
+// Create a legend to display information about our map.
+   let info = L.control({
+     position: "bottomright"
+   });
+  
+   // When the layer control is added, insert a div with the class of "legend".
+   info.onAdd = function() {
+     let div = L.DomUtil.create("div", "legend");
+     return div;
+   };
+   // Add the info legend to the map.
+   info.addTo(myMap);
+
+   var legend = L.control({position: 'bottomright'});
+
+   legend.onAdd = function (map) {
+  
+    var div = L.DomUtil.create('div', 'info legend'),
+        depth = [-10, 10, 30, 50, 70, 90],
+        labels = [];
+
+    // loop through our density intervals and generate a label with a colored square for each interval
+    for (var i = 0; i < depth.length; i++) {
+        div.innerHTML +=
+            '<i style="background:' + setDepthColor(depth[i] + 1) + '"></i> ' +
+            depth[i] + (depth[i + 1] ? ' &ndash; ' + depth[i + 1] + '<br>' : '+');
+    }
+
+    return div;
+};
+
+  legend.addTo(myMap);
+
   
   // Create a layer control.
   // Pass it our baseMaps and overlayMaps.
