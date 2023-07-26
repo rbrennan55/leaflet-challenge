@@ -26,19 +26,27 @@ function setDepthColor(quakeDepth) {
         default:
             return "#00ff00";
     }
-}
+};
+
+function setDepthRadius(feature, latlng) {
+    var marker = {
+      radius: feature.properties.mag * 20000,
+      fillColor: setDepthColor(feature.geometry.coordinates[2]),
+      fillOpacity: 1,
+      color: "black",
+      weight: 1
+    }
+    return L.circle(latlng,marker);
+  };
+
 
 function createFeatures(earthquakeData) {
 
-  // Define a function that we want to run once for each feature in the features array.
-  // Give each feature a popup that describes the place and time of the earthquake.
-//   function onEachFeature(feature, layer) {
-//       layer.bindPopup(`<h3>Location: ${feature.properties.place}</h3><hr><p>Date: ${new Date(feature.properties.time)}</p>
-//       <p>Magnitude: ${feature.properties.mag}</p><p>Depth: ${feature.geometry.coordinates[2]}</p>`);
-//   }
+  // Create a GeoJSON layer that contains the features array on the earthquakeData object.
+  // Run the onEachFeature function once for each piece of data in the array.
 
   function onEachFeature(feature, layer) {
-    layer.bindPopup(`<h3>Location: ${feature.properties.place}</h3><hr><p>Date: ${Date(feature.properties.time)}</p>
+    layer.bindPopup(`<h3>Location: ${feature.properties.place}</h3><hr>
     <p>Magnitude: ${feature.properties.mag}</p><p>Depth: ${feature.geometry.coordinates[2]}</p>`);
 }
 
@@ -46,18 +54,10 @@ function createFeatures(earthquakeData) {
   // Run the onEachFeature function once for each piece of data in the array.
   let earthquakes = L.geoJSON(earthquakeData, {
     onEachFeature: onEachFeature,
-    
-    pointToLayer: function(feature, latlng) {
-        var marker = {
-          radius: feature.properties.mag * 20000,
-          fillColor: setDepthColor(feature.geometry.coordinates[2]),
-          fillOpacity: 1,
-          color: "black",
-          weight: 1
-        }
-        return L.circle(latlng,marker);
-      }
+    pointToLayer: setDepthRadius
+   
   });
+
   techPlates = new L.layerGroup();
 
     // Perform a GET request to the tectonicplatesURL
@@ -79,9 +79,8 @@ function createMap(earthquakes) {
  	    attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
   });
 
-  let satellite = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
-    attribution: "Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com">Mapbox</a>'
-
+  let imagery =  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
   });
 
   let topograph = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
@@ -91,14 +90,14 @@ function createMap(earthquakes) {
    // Create a baseMaps object.
   let baseMaps = {
     "Greyscale Map": earthquakeBase,
-    "Satellite Map": satellite,
+    "Imagery Map": imagery,
     "Topographic Map": topograph
   };
 
   // Create an overlay object to hold our overlay.
   let overlayMaps = {
     "Earthquakes": earthquakes,
-    "Tectonic Plates": techPlates
+    "Techtonic Plates": techPlates
   };
 
   // Create our map, giving it the streetmap and earthquakes layers to display on load.
