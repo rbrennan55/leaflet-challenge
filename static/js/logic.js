@@ -11,20 +11,20 @@ d3.json(quakeURL).then(function (data) {
 });
 
 // Set the eartchquake depth color
-function setDepthColor(depth) {
+function setDepthColor(quakeDepth) {
     switch (true) {
-        case depth > 90:
-            return "red";
-        case depth > 70:
-            return "orangered";
-        case depth > 50:
-            return "orange";
-        case depth > 30:
-            return "gold";
-        case depth > 10:
-            return "yellow";
+        case quakeDepth > 90:
+            return "#ff0000";
+        case quakeDepth > 70:
+            return "#ff8000";
+        case quakeDepth > 50:
+            return "#ffbf00";
+        case quakeDepth > 30:
+            return "#ffff00";
+        case quakeDepth > 10:
+            return "#bfff00";
         default:
-            return "lightgreen";
+            return "#00ff00";
     }
 }
 
@@ -38,7 +38,7 @@ function createFeatures(earthquakeData) {
 //   }
 
   function onEachFeature(feature, layer) {
-    layer.bindPopup(`<h3>Location: ${feature.properties.place}</h3><hr><p>Date: ${feature.properties.time}</p>
+    layer.bindPopup(`<h3>Location: ${feature.properties.place}</h3><hr><p>Date: ${Date(feature.properties.time)}</p>
     <p>Magnitude: ${feature.properties.mag}</p><p>Depth: ${feature.geometry.coordinates[2]}</p>`);
 }
 
