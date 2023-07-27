@@ -78,11 +78,11 @@ function createMap(earthquakes) {
 
   // Create the base layers.
 
-  // let earthquakeBase = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  //   maxZoom: 19,
-  //   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-  // });
-  // let earthquakeBase = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', {
+  let earthquakeBase = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  });
+  //let earthquakeBase = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', {
  	//     attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
   // });
 
@@ -96,7 +96,7 @@ function createMap(earthquakes) {
 
    // Create a baseMaps object.
   let baseMaps = {
-    //"Greyscale Map": earthquakeBase,
+    "Greyscale Map": earthquakeBase,
     "Imagery Map": imagery,
     "Topographic Map": topograph
   };
