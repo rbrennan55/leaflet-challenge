@@ -1,7 +1,7 @@
 # leaflet-challenge
 ![alt text](images/1-Logo.png)
 ### Dashboard
-The leaflet-challenge dashboard can be found at: 
+The leaflet-challenge dashboard can be found at: [https://rbrennan55.github.io/leaflet-challenge/](https://rbrennan55.github.io/leaflet-challenge/)
 ### Background
 The United States Geological Survey, or USGS for short, is responsible for providing scientific data about natural hazards, the health of our ecosystems and environment, and the impacts of climate and land-use change. Their scientists develop new methods and tools to supply timely, relevant, and useful information about the Earth and its processes.
 
