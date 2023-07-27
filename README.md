@@ -1,5 +1,5 @@
 # leaflet-challenge
-
+![alt text](images/1-Logo.png)
 ### Background
 The United States Geological Survey, or USGS for short, is responsible for providing scientific data about natural hazards, the health of our ecosystems and environment, and the impacts of climate and land-use change. Their scientists develop new methods and tools to supply timely, relevant, and useful information about the Earth and its processes.
 
@@ -17,24 +17,19 @@ Solution Files Submitted
 - /static/css/style.css
 - /static/js/logic.js
   
-Earthquake Visualization Map
-![alt text](images/2-BasicMap.png)
+Earthquake Visualization Map: 
+The USGS provides earthquake data in a number of different formats, updated every 5 minutes.  The "All Earthquakes from the Past 7 Days" gives a JSON representation of that data. The URL used of this JSON to pull in the data for the visualization is: [https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php](https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php).
 
-The USGS provides earthquake data in a number of different formats, updated every 5 minutes. Visit the USGS GeoJSON FeedLinks to an external site. page and choose a dataset to visualize. The following image is an example screenshot of what appears when you visit this link:
-![alt text](images/3-Data.png)
-
-"All Earthquakes from the Past 7 Days" gives a JSON representation of that data. Use the URL of this JSON to pull in the data for the visualization. The following image is a sampling of earthquake data in JSON format:
-![alt text](images/4-JSON.png)
-
-Using Leaflet, a map was created that plots all the earthquakes from your dataset based on their longitude and latitude.
-
-The data markers reflect the magnitude of the earthquake by their size and the depth of the earthquake by color. Earthquakes with higher magnitudes should appear larger, and earthquakes with greater depth should appear darker in color.
+Using Leaflet, a map was created that plots all the earthquakes from the dataset based on their longitude and latitude.
+The data markers reflect the magnitude of the earthquake by their size and the depth of the earthquake by color. Earthquakes with higher magnitudes are larger, and earthquakes with greater depth are darker in color:
 
 Popups are included that provide additional information about the earthquake when its associated marker is clicked.
 
 A legend was created that will provide context for your map data.
 
-The visualization looks something like the preceding map.
+The visualization appears as follows:
+
+![alt text](images/2-BasicMap.png)
 
 ### Part 2: Gather and Plot More Data
 
