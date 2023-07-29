@@ -7,7 +7,6 @@ let techPlatesURL = "https://raw.githubusercontent.com/fraxen/tectonicplates/mas
 
 // Perform a GET request to the query URL/
 d3.json(quakeURL).then(function (data) {
-  // Once we get a response, send the data.features object to the createFeatures function.
   createFeatures(data.features);
 });
 
@@ -44,16 +43,14 @@ function setDepthRadius(feature, layer) {
 
 function createFeatures(earthquakeData) {
 
-  // Create a GeoJSON layer that contains the features array on the earthquakeData object.
-  // Run the onEachFeature function once for each piece of data in the array.
+  // Create a GeoJSON layer that contains the features array on the earthquakeData object
+  // Run the onEachFeature function once for each data point
 
   function onEachFeature(feature, layer) {
     layer.bindPopup(`<h3>Location: ${feature.properties.place}</h3><hr>
     <p><b>Magnitude</b>: ${feature.properties.mag}</p><p><b>Depth:</b> ${feature.geometry.coordinates[2]}</p>`);
 }
 
-  // Create a GeoJSON layer that contains the features array on the earthquakeData object.
-  // Run the onEachFeature function once for each piece of data in the array.
   let earthquakes = L.geoJSON(earthquakeData, {
     onEachFeature: onEachFeature,
     pointToLayer: setDepthRadius
@@ -92,33 +89,26 @@ function createMap(earthquakes) {
     attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
   });
 
-   // Create a baseMaps object.
+   // Create a baseMaps
   let baseMaps = {
     "Greyscale Map": earthquakeBase,
     "Imagery Map": imagery,
     "Topographic Map": topograph
   };
 
-  // Create an overlay object to hold our overlay.
+  // Create an overlays 
   let overlayMaps = {
     "Earthquakes": earthquakes,
     "Techtonic Plates": techPlates
   };
 
-  // Create our map, giving it the streetmap and earthquakes layers to display on load.
+  // Create our map, giving it the techtonic and earthquakes layers
   let myMap = L.map("map", {
     center: [52.245, -104.847],
     zoom: 4,
     layers: [earthquakeBase, earthquakes, techPlates]
   });
 
-
-  // Create Legend
- 
-  
-
-  
-  
 // Create a legend to display information about our map.
    let info = L.control({
      position: "bottomright"
@@ -140,7 +130,7 @@ function createMap(earthquakes) {
         depth = [-10, 10, 30, 50, 70, 90],
         labels = [];
 
-    // loop through our density intervals and generate a label with a colored square for each interval
+    // Loop through our density intervals and generate a label with a coloured square for each interval
     for (var i = 0; i < depth.length; i++) {
         div.innerHTML +=
             '<i style="background:' + setDepthColor(depth[i] + 1) + '"></i> ' +
@@ -154,7 +144,6 @@ function createMap(earthquakes) {
 
   
   // Create a layer control.
-  // Pass it our baseMaps and overlayMaps.
   // Add the layer control to the map.
   L.control.layers(baseMaps, overlayMaps, {
     collapsed: false
